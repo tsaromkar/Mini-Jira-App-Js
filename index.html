@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="main.css">
+    <title>Mini Jira App</title>
+</head>
+
+<body>
+
+    <div>
+        <label>Enter a todo: </label>
+        <input type="text" id="inputField">
+        <button id="addTodoBtn">Add Todo</button>
+        <button id="clearAllTodosBtn">Clear All Todos</button>
+    </div>
+
+    <div>
+        <h2>Todos</h2>
+        <br />
+        <div id="tables" class="Row">
+            <table id="todosTable" class="Column">
+                <tr>
+                    <th>Todos</th>
+                </tr>
+            </table>
+            <table id="inProgressTable" class="Column">
+                <tr>
+                    <th>In Progress</th>
+                </tr>
+            </table>
+            <table id="doneTable" class="Column">
+                <tr>
+                    <th>Done</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content" id="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-inner-content">
+                <div id="todo-details"></div>
+                <div id="todo-status">
+                    <h3>Update Status</h3>
+                    <select id="select-todo-status"></select>
+                    <button id="done">Done</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
