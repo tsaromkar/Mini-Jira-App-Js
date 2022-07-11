@@ -15,21 +15,21 @@
         <button id="clearAllTodosBtn">Clear All Todos</button>
     </div>
 
-    <div>
+    <div id="content">
         <h2>Todos</h2>
         <br />
         <div id="tables" class="Row">
-            <table id="todosTable" class="Column">
+            <table id="todosTable" class="Column" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <tr>
                     <th>Todos</th>
                 </tr>
             </table>
-            <table id="inProgressTable" class="Column">
+            <table id="inProgressTable" class="Column" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <tr>
                     <th>In Progress</th>
                 </tr>
             </table>
-            <table id="doneTable" class="Column">
+            <table id="doneTable" class="Column" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <tr>
                     <th>Done</th>
                 </tr>

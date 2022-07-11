@@ -1,12 +1,28 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+table {
+  border: 1px solid;
+}
+
 th,
 td {
   border: 1px solid;
   width: 300px;
+  background-color: white;
+}
+
+#content {
+  height: 100%;
 }
 
 .Row {
   display: table;
   width: 900px;
+  height: 80%;
 }
 
 .Column {

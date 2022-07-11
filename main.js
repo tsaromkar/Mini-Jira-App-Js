@@ -123,7 +123,10 @@ const deleteTodo = (id, status, isDelete, event) => {
 const addTodoCell = (table, todoItem, prevStatus) => {
     var row = table.insertRow(-1);
     row.id = todoItem.id
-    row.insertCell(-1).appendChild(createTodoCard(todoItem));
+    row.setAttribute('draggable', 'true')
+    row.setAttribute('ondragstart', 'drag(event)')
+    var cell = row.insertCell(-1)
+    cell.appendChild(createTodoCard(todoItem));
     deleteTodo(todoItem.id, prevStatus)
 }
 
@@ -148,6 +151,8 @@ const addTodoToTables = (item, prevStatus) => {
             addTodoCell(todosTable, item, prevStatus)
     }
 }
+
+
 
 // get data from storge
 const getDataFromSessionStorage = (() => {
@@ -216,4 +221,47 @@ const createTodoList = (value) => {
     sessionStorage.setItem("count", count)
     sessionStorage.setItem("todoList", JSON.stringify(todoList))
     addTodoToTables(obj)
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    // console.log(ev.target)
+    ev.dataTransfer.setData("dragTodo", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    const id = ev.dataTransfer.getData("dragTodo");
+    const tr = document.getElementById(id);
+    let status
+    todoList.map(item => {
+        if (item.id === parseInt(id)) {
+            switch (ev.target.id) {
+                case "todosTable":
+                    item.todoStatus = TodoStatus.Todo
+                    status = TodoStatus.Todo
+                    break
+                case "inProgressTable":
+                    item.todoStatus = TodoStatus.InProgress
+                    status = TodoStatus.InProgress
+                    break
+                case "doneTable":
+                    item.todoStatus = TodoStatus.Done
+                    status = TodoStatus.Done
+                    break
+                default:
+                    item.todoStatus = TodoStatus.Todo
+                    status = TodoStatus.Todo
+            }
+        }
+    })
+
+    const deleteTodo = tr.querySelector("#deleteTodo");
+    deleteTodo.setAttribute('onclick', `deleteTodo(` + id + `, "` + status + `", true, event)`)
+    ev.target.appendChild(tr);
+    console.log(todoList)
+    sessionStorage.setItem('todoList', JSON.stringify(todoList))
 }
